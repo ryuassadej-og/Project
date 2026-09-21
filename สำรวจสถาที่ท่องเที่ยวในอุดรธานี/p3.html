@@ -4,18 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สำรวจสถานที่ในอุดรธานี</title>
+    
+     <style>
+          @font-face {
+            font-family: "Kanit";
+            src: url("fonts/Kanit-Regular.woff2") format("woff2");
+        }
+        *{
+            font-family: "Kanit";
+        }
+        .slideshow{
+            max-width: 500px;
+            width: 100%;
+            aspect-ratio: 500/300;
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+            box-shadow: 0 0 20px black;
+            border-radius: 5px;
+        }
+        .slide {
+          position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+        }
+
+        .slide.active {
+           opacity: 1;
+        }
+        .nav {
+            position: absolute;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body style="background-color: rgb(240, 255, 172);">
 <img src="img/อุทยานประวัติศาสตร์ภูพระบาท.png" alt="">
 <strong> <a style="font-size: 40px;" href="index.html">หน้าแรก</a> &sbquo;
-<a style="font-size: 40px;" href="index.html">พิพิธภัณฑบ้านเชียง</a> &sbquo;
+<a style="font-size: 40px;" href="p1.html">พิพิธภัณฑบ้านเชียง</a> &sbquo;
 <a style="font-size: 40px;" href="p2.html">ทะเลบัวแดง</a> &sbquo;
 <a style="font-size: 40px;" href="p3.html">อุทยานประวัติศาสตร์ภูพระบาท</a> &sbquo;
 <a style="font-size: 40px;" href="p4.html">วัดป่าภูก้อน</a> &sbquo;
 <a style="font-size: 40px;" href="p5.html">วัดป่าคำชะโนด</a>
 </strong>
 <center><p style="font-size: 30px; color: crimson;">
-    <img width="500px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Rock_formation_in_Phu_Phra_Bat.jpg/960px-Rock_formation_in_Phu_Phra_Bat.jpg" alt="">
+    <div class="slideshow">
+    <img class="slide active" src="img/31.png">
+    <img class="slide" src="img/32.png">
+
+    <div class="prev nav" onclick="move(-1)">
+        &#10094;
+    </div>
+    <div class="next nav" onclick="move(1)">
+        &#10095;
+    </div>
+</div>
 <br>
      อุทยานประวัติศาสตร์ภูพระบาท เป็นอุทยานประวัติศาสตร์แห่งหนึ่งของประเทศไทยภายใต้การดูแลของกรมศิลปากร กระทรวงวัฒนธรรม ตั้งอยู่บริเวณเชิงเขาภูพาน ครอบคลุมพื้นที่ 3,430 ไร่ ในเขตป่าสงวนแห่งชาติที่มีชื่อว่าป่าเขือน้ำ ท้องที่บ้านติ้ว ตำบลเมืองพาน อำเภอบ้านผือ จังหวัดอุดรธานี อยู่ห่างจากตัวจังหวัดเป็นระยะทางประมาณ 67 กิโลเมตร
 
@@ -40,8 +98,24 @@
 Facebook:
 <a href="https://www.facebook.com/phuphrabathistoricalpark" target="_blank ">https://www.facebook.com/phuphrabathistoricalpark</a> </p>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
 <img src="img/ชื่อตรงตูด.png" alt=""> 
-  
+    <script>
+    const slide = document.querySelectorAll('.slide');
+    const slideshow = document.querySelector('.slideshow');
+
+    let index = 0;
+    let interval;
+
+    function show(n) {
+        slide.forEach(slide => slide.classList.remove('active'));
+        slide[n].classList.add('active');
+    }
+    function move (step) {
+        index = (index + step + slide.length) % slide.length;
+        show(index);
+    }
+
+  </script>
 </body>
 </html>

@@ -4,6 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สำรวจสถานที่ในอุดรธานี</title>
+    
+    <style>
+          @font-face {
+            font-family: "Kanit";
+            src: url("fonts/Kanit-Regular.woff2") format("woff2");
+        }
+        *{
+            font-family: "Kanit";
+        }
+        .slideshow{
+            max-width: 500px;
+            width: 100%;
+            aspect-ratio: 500/300;
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+            box-shadow: 0 0 20px black;
+            border-radius: 5px;
+        }
+        .slide {
+          position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+        }
+
+        .slide.active {
+           opacity: 1;
+        }
+        .nav {
+            position: absolute;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body style="background-color: rgb(240, 255, 172);">
 <img src="img/ทะเลบัวแดง.png" alt="">
@@ -15,7 +63,18 @@
 <a style="font-size: 40px;" href="p5.html">วัดป่าคำชะโนด</a>
 </strong>
 <center><p style="font-size: 30px; color: crimson;">
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV7hiw2sExwRLiEdMJ9DGE0IbjpMf8K35JddtR6BAYSA&s=10" alt="">
+<div class="slideshow">
+    <img class="slide active" src="img/21.png">
+    <img class="slide" src="img/22.png">
+      <img class="slide" src="img/23.png">
+
+    <div class="prev nav" onclick="move(-1)">
+        &#10094;
+    </div>
+    <div class="next nav" onclick="move(1)">
+        &#10095;
+    </div>
+</div>
     <br>
      ทะเลบัวแดง ตั้งอยู่ในบึงหนองหาน แหล่งน้ำจืดธรรมชาติขนาดใหญ่ มีพื้นที่กว่า 36 ตารางกิโลเมตร อุดมสมบูรณ์ด้วยพันธุ์ปลา พันธุ์นก และพืชน้ำจำนวนมาก มีระบบนิเวศโดดเด่นและเป็นที่สนใจของนักวิชาการทั้งในประเทศและต่างประเทศ ซึ่งเดินทางมาศึกษาค้นคว้าอย่างต่อเนื่อง ช่วงเดือนธันวาคมถึงเดือนกุมภาพันธ์ ของทุกปี ดอกบัวแดงจะเบ่งบานมากที่สุด นักท่องเที่ยวจะมองเห็นดอกบัวแดงบานเต็มผืนน้ำของหนองหานสุดลูกหูลูกตา จึงเป็นที่มาของคำว่า “ทะเลบัวแดง”
 
@@ -44,6 +103,22 @@ Facebook:
 </p>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <img src="img/ชื่อตรงตูด.png" alt=""> 
-  
+  <script>
+    const slide = document.querySelectorAll('.slide');
+    const slideshow = document.querySelector('.slideshow');
+
+    let index = 0;
+    let interval;
+
+    function show(n) {
+        slide.forEach(slide => slide.classList.remove('active'));
+        slide[n].classList.add('active');
+    }
+    function move (step) {
+        index = (index + step + slide.length) % slide.length;
+        show(index);
+    }
+
+  </script>
 </body>
 </html>

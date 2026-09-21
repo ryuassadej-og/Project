@@ -4,6 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>สำรวจสถานที่ในอุดรธานี</title>
+    
+         <style>
+              @font-face {
+            font-family: "Kanit";
+            src: url("fonts/Kanit-Regular.woff2") format("woff2");
+        }
+        *{
+            font-family: "Kanit";
+        }
+        .slideshow{
+            max-width: 500px;
+            width: 100%;
+            aspect-ratio: 500/300;
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+            box-shadow: 0 0 20px black;
+            border-radius: 5px;
+        }
+        .slide {
+          position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transition: opacity 0.5s;
+        }
+
+        .slide.active {
+           opacity: 1;
+        }
+        .nav {
+            position: absolute;
+            top: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+    </style>
 </head>
 <body style="background-color: rgb(240, 255, 172);">
 <img src="img/วัดป่าภูก้อน.png" alt="">
@@ -15,7 +63,18 @@
 <a style="font-size: 40px;" href="p5.html">วัดป่าคำชะโนด</a>
 </strong>
 <center><p style="font-size: 30px; color: crimson;">
-    <img width="500px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdkUdoakgH0Q7CjjaF8ln5xnCChAQIjWQlOQqElmvz7LTXO7O88173zZ4&s=10" alt=""> 
+  <div class="slideshow">
+    <img class="slide active" src="img/41.png">
+    <img class="slide" src="img/42.png">
+      <img class="slide" src="img/43.png">
+
+    <div class="prev nav" onclick="move(-1)">
+        &#10094;
+    </div>
+    <div class="next nav" onclick="move(1)">
+        &#10095;
+    </div>
+</div>
     
 <br>
     วัดป่าภูก้อน ตั้งอยู่ในเขตป่าสงวนแห่งชาติป่านายูงและป่าน้ำโสม ท้องที่บ้านนาคำ ตำบลบ้านก้อง อำเภอนายูง จังหวัดอุดรธานี อันเป็นรอยต่อแผ่นดิน 3 จังหวัด คือ อุดรธานี เลย และหนองคาย กำเนิดขึ้นจากการดำริชอบของพุทธบริษัทสี่ ผู้ตระหนักถึงคุณประโยชน์อันยิ่งใหญ่ของธรรมชาติและป่าต้นน้ำลำธาร ซึ่งกำลังถูกทำลาย
@@ -43,8 +102,24 @@ Facebook:
 
     </p>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <img src="img/ชื่อตรงตูด.png" alt=""> 
-  
+    <script>
+    const slide = document.querySelectorAll('.slide');
+    const slideshow = document.querySelector('.slideshow');
+
+    let index = 0;
+    let interval;
+
+    function show(n) {
+        slide.forEach(slide => slide.classList.remove('active'));
+        slide[n].classList.add('active');
+    }
+    function move (step) {
+        index = (index + step + slide.length) % slide.length;
+        show(index);
+    }
+
+  </script>
 </body>
 </html>
